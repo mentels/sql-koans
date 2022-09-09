@@ -20,5 +20,15 @@ group by genre
 -- Meditate on joining data with aggregates
 select name, count(*)
 from customer
-	join event on customer.id = event.customer_id
+	join event on event.customer_id = customer.id
 group by name
+
+-- Meditate on grouping with filtering
+-- Find customers that borrowed more than 1 book 
+select customer.name, count(*) as "cnt"
+from event 
+join customer on customer.id = customer_id
+where type = 'Checkout'
+group by customer_id
+having cnt > 1
+
